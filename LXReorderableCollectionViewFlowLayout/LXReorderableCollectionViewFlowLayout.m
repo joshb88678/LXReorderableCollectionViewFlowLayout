@@ -240,6 +240,7 @@ static NSString * const kLXCollectionViewKeyPath = @"collectionView";
             translation = CGPointMake(0.0f, distance);
         } break;
         case LXScrollingDirectionLeft: {
+            [self.dataSource collectionView:self.collectionView removeItemFromFolderAtIndexPathIfNeeded:_selectedItemIndexPath];
             distance = -distance;
             CGFloat minX = 0.0f - contentInset.left;
             
@@ -250,6 +251,7 @@ static NSString * const kLXCollectionViewKeyPath = @"collectionView";
             translation = CGPointMake(distance, 0.0f);
         } break;
         case LXScrollingDirectionRight: {
+            [self.dataSource collectionView:self.collectionView removeItemFromFolderAtIndexPathIfNeeded:_selectedItemIndexPath];
             CGFloat maxX = MAX(contentSize.width, frameSize.width) - frameSize.width + contentInset.right;
             
             if ((contentOffset.x + distance) >= maxX) {
@@ -384,7 +386,11 @@ static NSString * const kLXCollectionViewKeyPath = @"collectionView";
             CGPoint viewCenter = self.currentView.center = LXS_CGPointAdd(self.currentViewCenter, self.panTranslationInCollectionView);
             
             [self invalidateLayoutIfNecessary];
-            
+            //TODO: start a timer to not immediately trigger the remove from folder
+            if (self.currentView.center.x < 0 || self.currentView.center.x > self.collectionView.frame.size.width) {
+                [self.dataSource collectionView:self.collectionView removeItemFromFolderAtIndexPathIfNeeded:_selectedItemIndexPath];
+                [self.currentView removeFromSuperview];
+            }
             switch (self.scrollDirection) {
                 case UICollectionViewScrollDirectionVertical: {
                     if (viewCenter.y < (CGRectGetMinY(self.collectionView.bounds) + self.scrollingTriggerEdgeInsets.top)) {
