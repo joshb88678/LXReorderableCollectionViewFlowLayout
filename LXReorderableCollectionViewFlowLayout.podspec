@@ -1,16 +1,16 @@
 Pod::Spec.new do |s|
   s.name = 'LXReorderableCollectionViewFlowLayout'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.summary = 'Extends UICollectionViewFlowLayout to support reordering of cells. Similar to long press and pan on books in iBook.'
-  s.homepage = 'https://github.com/lxcid/LXReorderableCollectionViewFlowLayout'
+  s.homepage = 'https://github.com/fkuehne/LXReorderableCollectionViewFlowLayout'
   s.license = {
     :type => 'MIT',
     :file => 'LICENSE'
   }
-  s.author = 'Stan Chang Khin Boon'
+  s.authors = {'Stan Chang Khin Boon', 'Felix Paul Kühne', 'Carola Nitz'}
   s.source = {
-    :git => 'https://github.com/lxcid/LXReorderableCollectionViewFlowLayout.git',
-    :tag => '0.1.1'
+    :git => 'https://github.com/fkuehne/LXReorderableCollectionViewFlowLayout.git',
+    :tag => s.version.to_s
   }
   s.platform = :ios, '4.3'
   s.source_files = 'LXReorderableCollectionViewFlowLayout/'
